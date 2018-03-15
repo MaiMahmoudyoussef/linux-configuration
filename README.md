@@ -2,6 +2,7 @@
 
 this is a document for Linux server configuration hosted on Amazon Lightsail
 IP address: http://18.197.159.3/
+or http://ec2-18-197-159-3.eu-central-1.compute.amazonaws.com/
 SSH port: 2200 
 
 ## Steps: 
@@ -163,4 +164,20 @@ application.secret_key = '12345'
 - in the /var/www/catalogproject/catalogproject/ directory active the virtualenv
 - run lotsofcatalog. py to add entries to your schema 
 - then deactivate 
+
+### For debugging the server run this 
+```sh
+$ sudo tail -f /var/log/apache2/error.log
+```
+### Common error
+`IOError: [Errno 2] No such file or directory: 'client_secrets.json'`
+you should hard code the path to 'client_secrets.json file' in the __ init__.py file 
+```sh
+CLIENT_ID = json.loads(
+    open('/var/www/catalogproject/catalogproject/client_secrets.json', 'r').read())['web']['client_id']
+```    
+    
+
+
+
 
